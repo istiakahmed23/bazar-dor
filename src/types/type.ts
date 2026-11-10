@@ -1,7 +1,5 @@
 
-/* ================================
-   CATEGORY TYPES
-================================ */
+  //  CATEGORY TYPES
 
 export interface ICategory {
   id: string;

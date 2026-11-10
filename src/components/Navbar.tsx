@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import Marque from "@/components/Marque";
 import { ICategory } from "@/types/type";
 import { signOut, useSession } from "@/lib/auth-client";
 import ProfileLinks from "@/components/ProfileLinks";
+import Image from "next/image";
 
-const CATEGORY_API =
-  "https://api.api-store.workers.dev/api/bazardor/categories";
+
+const CATEGORY_API ="https://api.api-store.workers.dev/api/bazardor/categories";
 
 const Navbar = () => {
   const router = useRouter();
@@ -184,9 +184,11 @@ const Navbar = () => {
                   className="flex items-center gap-2 rounded-full border border-gray-200 p-1 pr-3 transition hover:bg-gray-50"
                 >
                   {userImage ? (
-                    <img
+                    <Image
                       src={userImage}
                       alt={userName}
+                      width={32}
+                      height={32}
                       className="h-8 w-8 rounded-full object-cover"
                     />
                   ) : (
@@ -219,8 +221,8 @@ const Navbar = () => {
                     <ProfileLinks
                       userName={userName}
                       onClose={closeMenu}
-                      onSignOut={handleSignOut}
-                      isSigningOut={isSigningOut}
+                      // onSignOut={handleSignOut}
+                      // isSigningOut={isSigningOut}
                     />
                   </div>
                 )}
@@ -353,7 +355,7 @@ const Navbar = () => {
                     >
                       <span className="flex items-center gap-3">
                         {userImage ? (
-                          <img
+                          <Image
                             src={userImage}
                             alt={userName}
                             className="h-9 w-9 rounded-full object-cover"
@@ -386,8 +388,8 @@ const Navbar = () => {
                         <ProfileLinks
                       userName={userName}
                       onClose={closeMenu}
-                      onSignOut={handleSignOut}
-                      isSigningOut={isSigningOut}
+                      // onSignOut={handleSignOut}
+                      // isSigningOut={isSigningOut}
                     />
                       </div>
                     )}
@@ -419,8 +421,7 @@ const Navbar = () => {
         </nav>
       </div>
 
-      {/* DYNAMIC PRICE MARQUEE */}
-      <Marque />
+      
 
       {/* AUTHENTICATION ERROR */}
       {authError && (
