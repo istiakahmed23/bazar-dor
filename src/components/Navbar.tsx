@@ -3,18 +3,18 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 import { ICategory } from "@/types/type";
 import { signOut, useSession } from "@/lib/auth-client";
 import ProfileLinks from "@/components/ProfileLinks";
 import Image from "next/image";
+import { useRouter, usePathname } from "next/navigation";
 
-
-const CATEGORY_API ="https://api.api-store.workers.dev/api/bazardor/categories";
+const CATEGORY_API = "https://api.api-store.workers.dev/api/bazardor/categories";
 
 const Navbar = () => {
   const router = useRouter();
+  const pathname = usePathname();
 
   // Category states
   const [categories, setCategories] = useState<ICategory[]>([]);
@@ -138,6 +138,10 @@ const Navbar = () => {
   };
 
   // Profile Dropdown Content
+  //  Creating a helper function: for active navlink colorization
+  const isActiveLink = (href: string): boolean => {
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
 
 
   return (
@@ -221,8 +225,8 @@ const Navbar = () => {
                     <ProfileLinks
                       userName={userName}
                       onClose={closeMenu}
-                      // onSignOut={handleSignOut}
-                      // isSigningOut={isSigningOut}
+                    // onSignOut={handleSignOut}
+                    // isSigningOut={isSigningOut}
                     />
                   </div>
                 )}
@@ -287,6 +291,8 @@ const Navbar = () => {
         <nav className="mx-auto max-w-6xl px-4">
 
           {/* DESKTOP CATEGORIES */}
+
+          {/* DESKTOP CATEGORIES */}
           <div className="hidden h-9 items-center gap-6 md:flex">
             {loading ? (
               <p className="text-xs text-gray-400">
@@ -295,19 +301,28 @@ const Navbar = () => {
             ) : error ? (
               <p className="text-xs text-red-500">{error}</p>
             ) : (
-              categories.map((category) => (
-                
-                <Link
-                  key={category.id}
-                  href={`/category/${category.slug}`}
-                  className="flex items-center gap-1 text-xs font-medium text-gray-700 transition hover:text-green-700"
-                >
-                  <span>{category.icon}</span>
-                  <span>{category.nameBn}</span>
-                </Link>
-              ))
+              categories.map((category) => {
+                const href = `/category/${category.slug}`;
+                const active = isActiveLink(href);
+
+                return (
+                  <Link
+                    key={category.id}
+                    href={href}
+                    aria-current={active ? "page" : undefined}
+                    className={`flex items-center gap-1 text-xs font-medium transition-colors duration-200 ${active
+                        ? "font-bold text-white bg-green-600 px-3 py-3 pt-2 pb-2 rounded-xl"
+                        : "text-gray-700 hover:text-green-700"
+                      }`}
+                  >
+                    <span>{category.icon}</span>
+                    <span>{category.nameBn}</span>
+                  </Link>
+                );
+              })
             )}
           </div>
+
 
           {/* MOBILE NAVIGATION */}
           {isOpen && (
@@ -387,11 +402,11 @@ const Navbar = () => {
                     {isProfileOpen && (
                       <div className="mt-2">
                         <ProfileLinks
-                      userName={userName}
-                      onClose={closeMenu}
-                      // onSignOut={handleSignOut}
-                      // isSigningOut={isSigningOut}
-                    />
+                          userName={userName}
+                          onClose={closeMenu}
+                        // onSignOut={handleSignOut}
+                        // isSigningOut={isSigningOut}
+                        />
                       </div>
                     )}
                   </div>
@@ -422,7 +437,7 @@ const Navbar = () => {
         </nav>
       </div>
 
-      
+
 
       {/* AUTHENTICATION ERROR */}
       {authError && (
