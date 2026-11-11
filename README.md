@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# বাজার দর (BazarDor)
 
-## Getting Started
+### Your Daily Essential Market Price Tracker
 
-First, run the development server:
+**বাজার দর (BazarDor)** is a responsive web application designed to help users explore and track the latest prices of daily essential products across different markets in Bangladesh. Users can browse product categories, compare market prices, view price changes, and stay informed about everyday market trends.
+
+## 🚀 Technologies Used
+
+- **Next.js 16** – React framework for building the application.
+- **React** – Component-based user interface.
+- **TypeScript** – Type safety and better development experience.
+- **Tailwind CSS** – Responsive styling and modern UI design.
+- **HeroUI** – Reusable UI components.
+- **Lucide React** – Modern icons.
+- **Better Auth** – User authentication.
+- **MongoDB** – Database integration.
+- **REST API** – Fetching product, category, and market price data.
+
+## ✨ Key Features
+
+1. **Product Categories:** Browse daily essential products through organized categories such as rice, pulses, oil, vegetables, fish, and meat.
+
+2. **Market Price Comparison:** View minimum, maximum, and average prices of products across different markets and divisions in Bangladesh.
+
+3. **Real-Time Price Trends:** Explore current product prices along with price changes and percentage indicators to understand market trends.
+
+4. **User Authentication & Profile Management:** Securely sign up, sign in, and manage personal profile information.
+
+5. **Fully Responsive Design:** Enjoy a consistent and user-friendly experience across desktop, tablet, and mobile devices.
+
+## 📂 Project Setup
+
+### 1. Clone the Repository
+
+```bash
+git clone YOUR_REPOSITORY_URL
+```
+
+### 2. Navigate to the Project Directory
+
+```bash
+cd bazar-dor
+```
+
+### 3. Install Dependencies
+
+```bash
+npm install
+```
+
+### 4. Configure Environment Variables
+
+Create a `.env` file in the root directory and configure the required API and database credentials.
+
+```env
+NEXT_PUBLIC_API_URL=YOUR_API_URL
+MONGO_URI=YOUR_MONGODB_CONNECTION_STRING
+```
+
+Add any other authentication environment variables required by your Better Auth configuration.
+
+### 5. Run the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🏗️ Production Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To create an optimized production build:
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+To run the production application:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 👨‍💻 Developer
 
-## Deploy on Vercel
+**Project Name:** বাজার দর (BazarDor)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Purpose:** Making daily market price information accessible and easier to compare for everyone in Bangladesh.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+*বাজার দর — প্রয়োজনীয় পণ্যের দাম এক নজরে।*
