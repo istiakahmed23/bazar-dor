@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { Select, ListBox } from "@heroui/react";
 import { ICategory, IProduct } from "@/types/type";
 import ProductCard from './ProductCard';
+import Link from "next/link";
 
 interface CategoryProductsProps {
   category: ICategory;
@@ -80,8 +81,11 @@ const CategoryProduct = ({ category, products }: CategoryProductsProps) => {
 
         {/* Products */}
         {sortedProducts.length > 0 ? (
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div
+          
+          className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {sortedProducts.map((product) => (
+                
               <div key={product.id} className="min-w-0">
                 <ProductCard product={product} />
               </div>

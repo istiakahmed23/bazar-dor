@@ -14,7 +14,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <Link
-      href={`/product/${product.slug}`}
+      href={`/product/${product.id}`}
       className="group block rounded-xl border border-[#e3eae4] bg-white p-3 transition-all duration-200 hover:-translate-y-1 hover:border-green-300 hover:shadow-md sm:p-4"
     >
       {/* Product information */}
