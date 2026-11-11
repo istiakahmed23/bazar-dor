@@ -18,7 +18,7 @@ const SingleProdPage = async ({params,}: {params: Promise<{ slug: string }>})  =
     const product: IProduct = await res.json();
 
     return (
-        <main className="min-h-screen bg-[#f0f5f0]">
+        <main className="min-h-screen bg-[#f0f5f0] pb-7">
 
       <div className="mx-auto max-w-7xl px-4 py-5 sm:px-5 lg:px-6">
 
