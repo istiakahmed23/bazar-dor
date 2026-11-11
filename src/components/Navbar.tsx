@@ -296,6 +296,7 @@ const Navbar = () => {
               <p className="text-xs text-red-500">{error}</p>
             ) : (
               categories.map((category) => (
+                
                 <Link
                   key={category.id}
                   href={`/category/${category.slug}`}
