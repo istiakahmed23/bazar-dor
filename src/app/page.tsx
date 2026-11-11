@@ -1,4 +1,5 @@
 'use client';
+import Allproducts from "@/components/Allproducts";
 import Hero from "@/components/Hero";
 import ProductPriceDown from "@/components/ProductPriceDown";
 import ProductPriceIncrease from "@/components/ProductPriceIncrease";
@@ -11,6 +12,7 @@ export default function Home() {
         <Hero />
         <ProductPriceIncrease />
         <ProductPriceDown />
+        <Allproducts/>
       </div>
     </main>
   );
