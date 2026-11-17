@@ -3,14 +3,17 @@ import { betterAuth } from "better-auth";
 import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "@better-auth/mongo-adapter";
 
-// Make sure the MongoDB URI exists
 const mongoUri = process.env.MONGO_URI;
 
 if (!mongoUri) {
-  throw new Error("MONGO_URI is missing from environment variables");
+  throw new Error("MONGO_URI is missing");
 }
 
-// Reuse the MongoDB client during Next.js development
+if (!process.env.BETTER_AUTH_SECRET) {
+  throw new Error("BETTER_AUTH_SECRET is missing");
+}
+
+// Reuse MongoDB client during development
 const globalForMongo = globalThis as typeof globalThis & {
   mongoClient?: MongoClient;
 };
@@ -25,6 +28,10 @@ if (process.env.NODE_ENV !== "production") {
 const db = client.db("bazar-dor");
 
 export const auth = betterAuth({
+  secret: process.env.BETTER_AUTH_SECRET,
+
+  baseURL: process.env.BETTER_AUTH_URL,
+
   database: mongodbAdapter(db, {
     client,
   }),
@@ -36,13 +43,13 @@ export const auth = betterAuth({
 
   socialProviders: {
     google: {
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     },
 
     github: {
-      clientId: process.env.GITHUB_CLIENT_ID as string,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+      clientId: process.env.GITHUB_CLIENT_ID!,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
       scope: ["user:email"],
     },
   },

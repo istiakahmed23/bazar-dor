@@ -25,32 +25,79 @@ const SignUpPage = () => {
   const router = useRouter();
 
   // Email and password signup
-  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
+  
+const handleSubmit = async (
+  e: React.SyntheticEvent<HTMLFormElement>
+) => {
   e.preventDefault();
-    setPasswordError("");
 
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
+  setPasswordError("");
 
-    if (data.password !== data.confirmPassword) {
-      setPasswordError("পাসওয়ার্ড দুটি মিলছে না!");
+  const formData = new FormData(e.currentTarget);
+
+  const name = String(formData.get("name") ?? "").trim();
+  const email = String(formData.get("email") ?? "").trim();
+  const password = String(formData.get("password") ?? "");
+  const confirmPassword = String(
+    formData.get("confirmPassword") ?? ""
+  );
+
+  // Validate passwords
+  if (password !== confirmPassword) {
+    setPasswordError("পাসওয়ার্ড দুটি মিলছে না!");
+    return;
+  }
+
+  if (password.length < 8) {
+    setPasswordError("পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে!");
+    return;
+  }
+
+  setLoading(true);
+
+  try {
+    const { data, error } = await signUp.email({
+      name,
+      email,
+      password,
+    });
+
+    if (error) {
+      console.error("Signup error:", error);
+
+      setPasswordError(
+        error.message || "Account creation failed!"
+      );
+
+      toast.error(error.message || "Signup failed!");
+
       return;
     }
 
-    // console.log("Sign Up Data:", data);
-    const { data:resData, error } = await signUp.email({
-        email: data.email as string, // user email address
-        password:data.password as string, // user password -> min 8 characters by default
-        name: data.name as string, // user display name
-    });   
-    if(resData?.user.name){
-       toast.success("Account Created Successfully, Login to continue");
-      router.push("/signin");
+    if (data?.user) {
+      toast.success(
+        "Account Created Successfully! Please sign in."
+      );
 
+      router.push("/signin");
     }
-    console.log(resData, error);
-     
- };
+
+  } catch (error) {
+    console.error("Unexpected signup error:", error);
+
+    const message =
+      error instanceof Error
+        ? error.message
+        : "Something went wrong!";
+
+    setPasswordError(message);
+    toast.error(message);
+
+  } finally {
+    setLoading(false);
+  }
+};
+
   // Google and GitHub authentication
   const handleSocialSignIn = async ( provider: SocialProvider ) => {
     setPasswordError("");
